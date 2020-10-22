@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+// use App\Http\Controllers\SslcommerzController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/api/items', 'App/Http/Controllers/SslcommerzController@index');
+// Route::get('/api/items', 'App\Http\Controllers\SslcommerzController@index');
+Route::resource('/api/items', 'App\Http\Controllers\SslCommerzPaymentController');
 
-Route::resource('api/items', 'SslcommerzController');
+// Route::resource('api/items', 'SslcommerzController');
 
 
 // // SSLCOMMERZ Start
