@@ -134,7 +134,7 @@ class SslCommerzPaymentController extends Controller
         $post_data['value_c'] = "ref003";
         $post_data['value_d'] = "ref004";
 
-        return response()->json($post_data);
+        // return response()->json($post_data);
 
         #Before  going to initiate the payment order status need to update as Pending.
         $update_product = DB::table('orders')

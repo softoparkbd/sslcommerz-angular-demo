@@ -19,20 +19,21 @@ Route::get('/', function () {
 });
 // Route::get('/api/items', 'App\Http\Controllers\SslcommerzController@index');
 Route::resource('/api/items', 'App\Http\Controllers\SslCommerzPaymentController');
+// Route::get('/api/items', 'App\Http\Controllers\SslCommerzPaymentController@index');
 
 // Route::resource('api/items', 'SslcommerzController');
 
 
 // // SSLCOMMERZ Start
-// Route::get('/example1', 'SslCommerzPaymentController@exampleEasyCheckout');
-// Route::get('/example2', 'SslCommerzPaymentController@exampleHostedCheckout');
+Route::get('/example1', 'App\Http\Controllers\SslCommerzPaymentController@exampleEasyCheckout');
+Route::get('/example2', 'App\Http\Controllers\SslCommerzPaymentController@exampleHostedCheckout');
 
-// Route::post('/pay', 'SslCommerzPaymentController@index');
-// Route::post('/pay-via-ajax', 'SslCommerzPaymentController@payViaAjax');
+Route::post('/pay', 'App\Http\Controllers\SslCommerzPaymentController@index');
+Route::post('/pay-via-ajax', 'App\Http\Controllers\SslCommerzPaymentController@payViaAjax');
 
-// Route::post('/success', 'SslCommerzPaymentController@success');
-// Route::post('/fail', 'SslCommerzPaymentController@fail');
-// Route::post('/cancel', 'SslCommerzPaymentController@cancel');
+Route::post('/success', 'App\Http\Controllers\SslCommerzPaymentController@success');
+Route::post('/fail', 'App\Http\Controllers\SslCommerzPaymentController@fail');
+Route::post('/cancel', 'App\Http\Controllers\SslCommerzPaymentController@cancel');
 
-// Route::post('/ipn', 'SslCommerzPaymentController@ipn');
+Route::post('/ipn', 'App\Http\Controllers\SslCommerzPaymentController@ipn');
 // //SSLCOMMERZ END
