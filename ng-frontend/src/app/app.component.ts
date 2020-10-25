@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Form } from './Form';
-import { $ } from 'protractor';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
