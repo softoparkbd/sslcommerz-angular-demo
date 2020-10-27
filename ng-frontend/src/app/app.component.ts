@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Form } from './Form';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -20,14 +21,19 @@ export class AppComponent implements OnInit {
       .post('http://sslapi.local/pay-via-ajax', data)
       .subscribe((result) => {
         console.warn('result', result);
+        window.location.href = `${result['data']}`;
       });
   }
 
-  ngOnInit() {
+  formData() {
     // Make the http request:
     this.http.get<Form>(`http://sslapi.local/api/items`).subscribe((data) => {
       console.log(data);
       this.form = data;
     });
+  }
+
+  ngOnInit() {
+    this.formData();
   }
 }
