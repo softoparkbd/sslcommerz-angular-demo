@@ -58,10 +58,12 @@ class SslCommerzPaymentController extends Controller
         $post_data['product_profile'] = "physical-goods";
 
         # OPTIONAL PARAMETERS
-        $post_data['value_a'] = "ref001";
-        $post_data['value_b'] = "ref002";
+        $post_data['user_id'] = "User ID";
+        $post_data['plan_id'] = "Plan ID";
         $post_data['value_c'] = "ref003";
         $post_data['value_d'] = "ref004";
+        $post_data['created_at'] = date('Y-d-m H:i:s');
+        $post_data['updated_at'] = date('Y-d-m H:i:s');
 
         return response()->json($post_data);
 
@@ -89,6 +91,7 @@ class SslCommerzPaymentController extends Controller
         }
     }
 
+    // Method that wowweber uses 
     public function payViaAjax(Request $request)
     {
 
@@ -129,10 +132,12 @@ class SslCommerzPaymentController extends Controller
         $post_data['product_profile'] = "physical-goods";
 
         # OPTIONAL PARAMETERS
-        $post_data['value_a'] = "ref001";
-        $post_data['value_b'] = "ref002";
+        $post_data['user_id'] = $request->input('user_id');
+        $post_data['plan_id'] = $request->input('plan_id');
         $post_data['value_c'] = "ref003";
         $post_data['value_d'] = "ref004";
+        $post_data['created_at'] = date('Y-m-d H:i:s');
+        $post_data['updated_at'] = date('Y-m-d H:i:s');
 
         // return response()->json($post_data);
 
@@ -147,11 +152,15 @@ class SslCommerzPaymentController extends Controller
                 'status' => 'Pending',
                 'address' => $post_data['cus_add1'],
                 'transaction_id' => $post_data['tran_id'],
-                'currency' => $post_data['currency']
+                'currency' => $post_data['currency'],
+                'user_id' => $post_data['user_id'],
+                'plan_id' => $post_data['plan_id'],
+                'created_at' => $post_data['created_at'],
+                'updated_at' => $post_data['updated_at'],
             ]);
 
         $sslc = new SslCommerzNotification();
-        # initiate(Transaction Data , false: Redirect to SSLCOMMERZ gateway/ true: Show all the Payement gateway here )
+        # initiate(Transaction Data , false: Redirect to SSLCOMMERZ gateway/ true: Show all the Payment gateway here )
         $payment_options = $sslc->makePayment($post_data, 'checkout', 'json');
 
         if (!is_array($payment_options)) {
@@ -170,7 +179,7 @@ class SslCommerzPaymentController extends Controller
 
         $sslc = new SslCommerzNotification();
 
-        #Check order status in order tabel against the transaction id or order id.
+        #Check order status in order table against the transaction id or order id.
         $order_detials = DB::table('orders')
             ->where('transaction_id', $tran_id)
             ->select('transaction_id', 'status', 'currency', 'amount')->first();
@@ -189,7 +198,7 @@ class SslCommerzPaymentController extends Controller
                     ->update(['status' => 'Processing']);
 
                 echo "<br >Transaction is successfully Completed";
-                // dd($order_detials);
+                // displays all the data 
                 dd($request->all());
             } else {
                 /*
