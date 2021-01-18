@@ -31,9 +31,12 @@ Route::get('/example2', 'App\Http\Controllers\SslCommerzPaymentController@exampl
 Route::post('/pay', 'App\Http\Controllers\SslCommerzPaymentController@index');
 Route::post('/pay-via-ajax', 'App\Http\Controllers\SslCommerzPaymentController@payViaAjax');
 
-Route::post('/success', 'App\Http\Controllers\SslCommerzPaymentController@success');
+// Route::post('/success', 'App\Http\Controllers\SslCommerzPaymentController@success');
+Route::post('/success', 'App\Http\Controllers\SslCommerzPaymentController@success2');
 Route::post('/fail', 'App\Http\Controllers\SslCommerzPaymentController@fail');
 Route::post('/cancel', 'App\Http\Controllers\SslCommerzPaymentController@cancel');
 
 Route::post('/ipn', 'App\Http\Controllers\SslCommerzPaymentController@ipn');
 // //SSLCOMMERZ END
+
+Route::get('/my-api-call', 'App\Http\Controllers\SslCommerzPaymentController@apicall');
